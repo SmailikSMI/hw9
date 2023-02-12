@@ -11,68 +11,50 @@ public class StringUtils {
 
     public static void println(char[] string) {
         System.out.print("Your string: ");
-        for (int j = 0; j < string.length; j++) {
-            System.out.print(string[j]);
-        }
+        print(string);
         System.out.println();
     }
 
     public static boolean isBank(char[] string) {
-        if (string.length == 0) {
-            return true;
-        }
-        char space = 0;
         for (int j = 0; j < string.length; j++) {
-            if (string[j] == ' ') {
-                space++;
+            if (!Character.isWhitespace(string[j])) {
+                return false;
             }
         }
-        return space == string.length;
+        return true;
     }
 
     public static boolean isRussian(char[] string) {
-        int i = 0;
-        int space = 0;
         for (int j = 0; j < string.length; j++) {
-            if (string[j] == ' ') {
-                space++;
-            }
-            if (string[j] > 'А' && string[j] < 'я' || string[j] == ' ') {
-                i++;
-            }
-            if (space == string.length) {
+            char ch=string[j];
+            if (!((ch =='А' & ch == 'я')|| ch == 'ё' || ch == 'Ë')) {
                 return false;
-            }
-            if (i == string.length) {
-                return true;
             }
         }
         return false;
     }
 
     public static boolean contains(char[] string, char[] subString) {
-        int i = 0;
-        char val1 = 0;
-        char val2 = 0;
-        for (int j = 0; j < string.length; j++) {
-            string[j] = val1;
-            subString[j] = val2;
-            if (val1 == val2) {
-                i++;
+
+        for (int i = 0; i <= string.length - subString.length; i++) {
+            boolean equal = true;
+            for (int j = 0; j < subString.length; j++) {
+                if (string[i + j] != subString[j]) {
+                    equal = false;
+                }
             }
-            if (i == subString.length) {
-                return true;
-            }
+            if (equal) return true;
         }
         return false;
     }
 
     public static int parseInt(char[] string) {
-        int digit = 0;
+        int numbers = 0;
         for (int j = 0; j < string.length; j++) {
-            digit += (string[j] - '0') * (int) Math.pow(10, string.length - j - 1);
+            int digit=(string[j] - '0');
+            numbers += digit * (int) Math.pow(10, string.length - j - 1);
         }
-        return digit;
+        return numbers;
     }
 }
 

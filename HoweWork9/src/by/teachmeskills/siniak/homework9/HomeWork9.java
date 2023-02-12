@@ -26,7 +26,7 @@ public class HomeWork9 {
             }
             case 4 -> {
                 Scanner sca = new Scanner(System.in);
-                System.out.println("Введите символы: ");
+                System.out.println("Enter subString: ");
                 char[] subString = sca.nextLine().toCharArray();
                 boolean contains = StringUtils.contains(string, subString);
                 System.out.println("This string contenting second string?");
