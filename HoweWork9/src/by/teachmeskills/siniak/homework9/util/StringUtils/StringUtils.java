@@ -10,7 +10,6 @@ public class StringUtils {
     }
 
     public static void println(char[] string) {
-        System.out.print("Your string: ");
         print(string);
         System.out.println();
     }
@@ -26,12 +25,12 @@ public class StringUtils {
 
     public static boolean isRussian(char[] string) {
         for (int j = 0; j < string.length; j++) {
-            char ch=string[j];
-            if (!((ch =='А' & ch == 'я')|| ch == 'ё' || ch == 'Ë')) {
+            char ch = string[j];
+            if (!((ch >= 'А' && ch <= 'я') || ch == 'ё' || ch == 'Ë')) {
                 return false;
             }
         }
-        return false;
+        return true;
     }
 
     public static boolean contains(char[] string, char[] subString) {
@@ -51,7 +50,10 @@ public class StringUtils {
     public static int parseInt(char[] string) {
         int numbers = 0;
         for (int j = 0; j < string.length; j++) {
-            int digit=(string[j] - '0');
+            if (!Character.isDigit(string[j])) {
+                throw new IllegalArgumentException("Not a number");
+            }
+            int digit = (string[j] - '0');
             numbers += digit * (int) Math.pow(10, string.length - j - 1);
         }
         return numbers;
